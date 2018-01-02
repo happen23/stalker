@@ -4,10 +4,15 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 class App(tk.Frame):
-    def __init__(self, path, master=None):
-        super().__init__(master, padx=0, pady=0, width=400, height=300)
+    def __init__(self, path, master=None, width=400, height=300, padx=0, pady=0):
+        super().__init__(master)
+        self._geom = '{0}x{1}+{2}+{3}'.format(width, height, padx, pady)
         self.pack()
 
+        self.master = master
+        master_pad_x_y = 3
+        master.geometry("{0}x{1}+0+0".format(master.winfo_screenwidth()-master_pad_x_y,\
+            master.winfo_screenheight()-master_pad_x_y))
         self.exit = False
         self.path_generator = os.walk(path)
         self.tk_img = None
@@ -17,7 +22,13 @@ class App(tk.Frame):
         self.label = tk.Label(self, text=path, compound=tk.BOTTOM)
         self.label.grid()
         master.bind('<Button-1>', self.handle_click)
-        master.bind('<KeyPress-H>', self.handle_click)
+        master.bind('<Double-Button-1>', self.toggle_geom)
+
+    def toggle_geom(self, event):
+        geom = self.master.winfo_geometry()
+        print(geom, self._geom)
+        self.master.geometry(self._geom)
+        self._geom = geom
 
     def handle_click(self, event):
         if self.exit:
