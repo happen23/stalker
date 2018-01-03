@@ -1,5 +1,6 @@
 import os
 import sys
+import math
 import tkinter as tk
 from PIL import Image, ImageTk
 
@@ -10,7 +11,7 @@ class App(tk.Frame):
         self.pack()
 
         self.master = master
-        master_pad_x_y = 3
+        master_pad_x_y = 0
         master.geometry("{0}x{1}+0+0".format(master.winfo_screenwidth()-master_pad_x_y,\
             master.winfo_screenheight()-master_pad_x_y))
         self.exit = False
@@ -57,9 +58,12 @@ class App(tk.Frame):
         print(img_path)
         self.pil_img = Image.open(img_path)
         width, height = self.pil_img.size
-        while width > 1000 or height > 1000:
-            width = width // 2
-            height = height // 2
+        show_width, show_height = self.master.winfo_width(), self.master.winfo_height()
+        ratio_width = show_width / width
+        ratio_height = show_height / height
+        ratio = min(ratio_width, ratio_height)
+        height = math.floor(height * ratio)
+        width = math.floor(width * ratio)
         temp_img = self.pil_img.resize((width, height))
         self.tk_img = ImageTk.PhotoImage(image=temp_img)
         self.label.configure(text=img_path, image=self.tk_img)
