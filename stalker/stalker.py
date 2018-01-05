@@ -2,6 +2,7 @@ import os
 import sys
 import math
 import tkinter as tk
+from tkinter import ttk
 from PIL import Image, ImageTk
 
 class App(tk.Frame):
@@ -20,7 +21,7 @@ class App(tk.Frame):
         self.cur_path_has_img = None
         self.cur_img_list = []
 
-        self.label = tk.Label(self, text=path, compound=tk.BOTTOM)
+        self.label = ttk.Label(self, text=path, compound=tk.BOTTOM)
         self.label.grid()
         master.bind('<Button-1>', self.handle_click)
         master.bind('<Double-Button-1>', self.toggle_geom)
