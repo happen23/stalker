@@ -22,8 +22,9 @@ class App(tk.Frame):
         self.cur_path_has_img = None
         self.cur_img_list = []
 
-        self.label = ttk.Label(self)
-        self.label.grid()
+        self.canvas = tk.Canvas(self, width=self.master.winfo_screenwidth(), height=self.master.winfo_screenheight())
+        self.canvas.grid()
+        self.canvas.create_image((0,0), anchor=tk.NW, tags="photo")
         master.bind('<Button-1>', self.handle_click)
         master.bind('<Double-Button-1>', self.toggle_geom)
 
@@ -68,7 +69,7 @@ class App(tk.Frame):
         width = math.floor(width * ratio)
         temp_img = self.pil_img.resize((width, height))
         self.tk_img = ImageTk.PhotoImage(image=temp_img)
-        self.label.configure(text=img_path, image=self.tk_img)
+        self.canvas.itemconfigure('photo', image=self.tk_img)
         self.master.title(img_path)
 
 if __name__ == '__main__':
