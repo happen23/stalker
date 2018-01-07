@@ -12,6 +12,7 @@ class App(tk.Frame):
         self.pack()
 
         self.master = master
+        self.master.title(path)
         master_pad_x_y = 0
         master.geometry("{0}x{1}+0+0".format(master.winfo_screenwidth()-master_pad_x_y,\
             master.winfo_screenheight()-master_pad_x_y))
@@ -21,7 +22,7 @@ class App(tk.Frame):
         self.cur_path_has_img = None
         self.cur_img_list = []
 
-        self.label = ttk.Label(self, text=path, compound=tk.BOTTOM)
+        self.label = ttk.Label(self)
         self.label.grid()
         master.bind('<Button-1>', self.handle_click)
         master.bind('<Double-Button-1>', self.toggle_geom)
@@ -68,6 +69,7 @@ class App(tk.Frame):
         temp_img = self.pil_img.resize((width, height))
         self.tk_img = ImageTk.PhotoImage(image=temp_img)
         self.label.configure(text=img_path, image=self.tk_img)
+        self.master.title(img_path)
 
 if __name__ == '__main__':
     path = sys.argv[1]
