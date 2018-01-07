@@ -36,7 +36,6 @@ class App(tk.Frame):
     def handle_click(self, event):
         if self.exit:
             print("no more photos!")
-            self.label.configure(text="没有更多照片了", image=None)
             quit()
         if len(self.cur_img_list) == 0:
             while True:
@@ -49,6 +48,7 @@ class App(tk.Frame):
                             break
                 except StopIteration:
                     self.exit = True
+                    self.master.title("没有更多照片了")
                     return
             self.cur_path_has_img = cur_path
             self.cur_img_list = img_files
