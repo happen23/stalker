@@ -19,6 +19,14 @@ canon/
 
 One day I wantted to look back my good old days, I found all free image viewers which are available in windows desktop can't traverse the sub-directoried described above, so I decided to make a handy image [pre]viewer by myself.
 
+I'm wrong, you can do the metioned operation in [FastStone Image Viewer](http://www.faststone.org/FSViewerDetail.htm), just do some setting:
+1. Press F12, and the `Settings` dialog will show up
+2. Select `Viewer` Tab (actually it's the default tab ;) )
+3. check the `Auto Next Folder` cehckbox
+4. Press `OK` and taht's Done
+
+So, this repo has no reason to develop, **Goodbye**!
+
 ## usage
 
 1. open toplevel photo directory
